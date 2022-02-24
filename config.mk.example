@@ -10,17 +10,17 @@ LDFLAGS+=-lX11 # for xorg display
 MOD_points?=sfmt
 MOD_render?=gi
 MOD_filter?=blackmanharris
-MOD_sampler?=ptdl
+MOD_sampler?=ptdl_dbor
 MOD_lights?=list
 MOD_pointsampler?=halton
 # EXTRA_SOURCES=src/pathspace/guided.c
 MUTATIONS?=
 # input can be anything: ergb (for smits), xyz, aces, srgb, rec709
-COL_input?=ergb
+COL_input?=rec709
 # output for display only: can have gamma: adobergb, srgb, or custom profile
-COL_output?=adobergb
+COL_output?=srgb
 # framebuffer will end up in pfm: needs to be linear: xyz, rec709
-COL_camera?=xyz
+COL_camera?=rec709
 
 include arch
 # use qwertz keyboard instead of dvorak in gui (i.e. MOD_display!=null)
