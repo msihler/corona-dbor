@@ -359,6 +359,7 @@ mf_t shader_sky_sample(path_t *p)
 
   // for p(pos) = 1/A
   const float pdf_area = 1.0f/((maxa-mina)*(maxb-minb));
+  printf("SHADER CALLED");
   p->v[1].pdf = mf_mul(p->v[0].pdf, mf_set1(pdf_area)); // vertex is sampled in vertex area measure on the quad
   p->v[0].pdf = mf_set1(1.0f);
     

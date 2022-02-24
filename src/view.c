@@ -63,9 +63,25 @@ typedef struct view_t
   double *fb_welch_sum;         // records sum of welch samples. This is different from the frame buffer as it updates only every 3 samples per pixel
   double *fb_welch_tmp;         // records current 3 frames. Each 3 frames this is added squared to fb_welch_squared, and added to fb_welch_sum
 
+  int screenshot_spp;           // spp at which to write out screenshot and welch and everything
+  int screenshot_exp;		        // if this is 1, write out screenshot and welch and everything at 1, 2, 4, 8, ...
+
   view_move_t moving;
 }
 view_t;
+
+
+static inline int screenshot_condition(int curr_samples)
+{
+	if (rt.view->screenshot_exp)
+	{
+		if ((curr_samples & ~(curr_samples-1)) == curr_samples) // checks power of 2
+		{
+			return 1;
+		}
+	}
+	return curr_samples == rt.view->screenshot_spp && rt.view->screenshot_spp > 0;
+}
 
 static const float view_full_frame_width = 0.35f; // [mm]
 static const float view_f_stop[] = {
@@ -106,6 +122,10 @@ uint64_t view_overlays()
   return rt.view->overlays;
 }
 
+void increase_overlays() {
+  rt.view->overlays++;
+}
+
 void view_clear_frame(view_t *r)
 {
   for(int c=0;c<r->num_fbs;c++)
@@ -131,6 +151,14 @@ void view_clear()
   sampler_clear(rt.sampler);
   pointsampler_clear();
   render_clear();
+}
+
+void screenshotAndStop(uint64_t numSamples) {
+
+  //char str[150] = "";
+ // sprintf(str, "%" PRIX64, numSamples);
+  view_write_images("sampleRender");
+  view_clear();
 }
 
 static inline int parse_Av(const char *fstop)
@@ -272,6 +300,9 @@ view_t *view_init()
   v->lf_tile_size = 0;           // light field stuff: pixel tile size
   v->lf_scale = 0.1f;            // scale converting directions to relative position in tile
   
+  v->screenshot_spp = -1;
+  v->screenshot_exp = 0;
+
   for(int i=0;i<rt.argc;i++)
   {
     if     ((strcmp(rt.argv[i], "-c") == 0) && (rt.argc > i+1)) cam_file = rt.argv[++i];
@@ -289,8 +320,11 @@ view_t *view_init()
     else if((strcmp(rt.argv[i], "--lf-tile-size") == 0) && (rt.argc > i+1)) v->lf_tile_size = atol(rt.argv[++i]);
     else if((strcmp(rt.argv[i], "--lf-scale") == 0) && (rt.argc > i+1)) v->lf_scale = atof(rt.argv[++i]);
     else if((strcmp(rt.argv[i], "--dbor") == 0) && (rt.argc > i+1)) { v->num_dbors = atol(rt.argv[++i]); v->num_dbors = CLAMP(v->num_dbors, 0, 20); }
+    else if((strcmp(rt.argv[i], "--spp") == 0) && (rt.argc > i+1)) v->screenshot_spp = atol(rt.argv[++i]);
+    else if( strcmp(rt.argv[i], "--scr-exp") == 0) v->screenshot_exp = 1;
   }
 
+  printf("screenshot spp: %d, scr-exp: %d\n", v->screenshot_spp, v->screenshot_exp);
   // fullfill 32-alignment for tiles.
   while(v->width  & 0x1f) v->width++;
   while(v->height & 0x1f) v->height++;
@@ -510,6 +544,14 @@ void view_splat_col(const path_t *path, const float *col)
         coll[k] = lv * col[k];
         colu[k] = uv * col[k];
       }
+      if (l > 0) {
+        //Set the factor of the corresponding pixel block to the dbor level
+        if (lv < 0.5) {
+          setNewFactor(l, path->sensor.pixel_i, path->sensor.pixel_j);
+        } else {
+          setNewFactor(l+1, path->sensor.pixel_i, path->sensor.pixel_j);
+        }
+      }   
       filter_blackmanharris_splat(rt.view->dbor+l,
           path->sensor.pixel_i, path->sensor.pixel_j, coll);
       if (u < rt.view->num_dbors)
@@ -544,6 +586,11 @@ void view_write_images(const char *suffix)
   for(int fid=0;fid<rt.view->num_fbs;fid++)
   {
     snprintf(filename, sizeof(filename), "%s%s_fb%02d.pfm", rt.basename, suffix, fid);
+    if (screenshot_condition(rt.view->overlays))
+    {
+      snprintf(filename, sizeof(filename), "%s%s_%"PRIu64"spp_fb%02d.pfm", rt.basename, suffix, rt.view->overlays, fid);
+      printf("Write screenshot: %s\n", filename);
+    }
     fb_export(rt.view->fb+fid, filename, 0, 3);
     common_write_sidecar(filename);
   }
@@ -630,7 +677,9 @@ void view_render()
 
   const double time_begin = common_time_wallclock();
   // step sample counter globally in 1spp intervals:
-  const uint64_t end = t->counter + (uint64_t)rt.batch_frames * (uint64_t)(rt.view->width * rt.view->height);
+  uint64_t sampleCount = getSampleCount(rt.view->width, rt.view->height);
+  const uint64_t end = t->counter + sampleCount * rt.batch_frames;
+ // const uint64_t end = t->counter + (uint64_t)rt.batch_frames * (uint64_t)(rt.view->width * rt.view->height);
   t->counter = t->end;
   t->end = end;
   // do this only now so they know how many samples the threads use
@@ -645,7 +694,7 @@ void view_render()
   pointsampler_finalize(rt.pointsampler);
 
   // update progression count in frame buffer files:
-  rt.view->overlays += rt.batch_frames;
+  rt.view->overlays += 1;
   for(int c=0;c<rt.view->num_fbs;c++)
   {
     const int cid = c / (rt.view->num_fbs/rt.view->num_cams);
@@ -679,6 +728,11 @@ void view_render()
       }
       rt.view->fb_welch_sample_count += 1.0;
     }
+  }
+  else
+  {
+    if (screenshot_condition(rt.view->overlays))
+      view_write_images(rt.output_filename);
   }
 
   const double time_end = common_time_wallclock();

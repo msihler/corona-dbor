@@ -46,6 +46,21 @@ int pointsampler_accept(struct path_t *curr, struct path_t *tent);
 void pointsampler_mutate(struct path_t *curr, struct path_t *tent);
 void pointsampler_mutate_with_pixel(struct path_t *curr, struct path_t *tent, float i, float j);
 
+//Return the factor of the pixel block of the given pixels (gets called in blackmanharris.h)
+int getFactor(float i, float j);
+//The factor of the block of the given pixels gets set to the dborLevel
+void setNewFactor(int dborLevel, float i, float j);
+//The array newFactor is reset
+void resetNewFactor();
+//The current given samples are returned as a .pfm file
+void write_samples_as_framebuffer();
+//Apply a gaussian filter to the factor map
+void applygaussian();
+
+uint64_t getSampleCount(float i, float j);
+
+int translateTrustToSampleValue(float trust);
+
 void pointsampler_clear();
 void pointsampler_cleanup(pointsampler_t *s);
 void pointsampler_set_large_step(pointsampler_t *t, float p_large_step);

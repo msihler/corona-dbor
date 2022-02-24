@@ -105,6 +105,12 @@ static mf_t _camera_sample_internal(
   // pdf of outgoing ray in projected solid angle measure = p_v / G
   const float pdf_v = 1.0f/(c->film_width*c->film_height); // surface area pdf on film
   p->v[1].pdf = mf_set1(pdf_v * pdf_a / G); // will be transformed to vertex area in scene by geometric term later on.
+  /*if (p->sensor.pixel_i < 300) {
+      if (p->sensor.pixel_j < 300) {
+        p->v[1].pdf = p->v[1].pdf * 40.0f;
+      }
+  }*/
+  //printf("New V[1].pdf = %f \n", p->v[1].pdf);
   // assert(fabsf(camera_pdf(c, p, 0) - p->v[1].pdf) < 0.001f*fabsf(p->v[1].pdf));
 
   for(int k=0;k<3;k++) p->v[0].hit.x[k] += aoff[k];

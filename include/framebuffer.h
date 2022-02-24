@@ -141,17 +141,18 @@ static inline int fb_save_copy(
 // will write out a pfm file, accounting for gain
 static inline int fb_export(
     framebuffer_t *fb,
-    const char *filename,
+    const char *filename, //needs to contain the suffix .pfm
     const int cbeg,    // first channel to write per pixel
     const int ccnt)    // number of channels to write per pixel (clamped to 3)
 {
-  FILE* f = fopen(filename, "wb");
+  FILE* f = fopen(filename, "w+");
   if(!f) return 1;
   // align pfm header to sse, assuming the file will
   // be mmapped to page boundaries.
   char header[1024];
   snprintf(header, 1024, "PF\n%lu %lu\n-1.0", fb->header->width, fb->header->height);
   size_t len = strlen(header);
+  
   fprintf(f, "PF\n%lu %lu\n-1.0", fb->header->width, fb->header->height);
   ssize_t off = 0;
   while((len + 1 + off) & 0xf) off++;

@@ -1,0 +1,15 @@
+pos_world = (16.703575, 0.252659, 6.351364)
+lookat = (15.747989, 0.240555, 6.056901)
+up = (-0.294514, 0.002612, 0.955644)
+frame_orientation w = -0.423965, X = (-0.570684, 0.567087, 0.415982)
+focus_sensor_offset = 0.000000
+focus = 21.637823
+film width = 0.350000
+film height = 0.196875
+crop_factor = 1.000000
+aperture_value = 6
+exposure_value = 13
+focal_length = 0.600000
+fov_x = 32.520408
+fov_y = 18.634171
+iso = 400.000000

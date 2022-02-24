@@ -1,0 +1,28 @@
+const 1 1 1 0.5
+11
+diffuse # 0
+colorcheckersg d # 1 
+mult 1 1 0 # 2 plane
+color d 0 0 0 # 3
+color e 1e6 1e6 1e6 1. # 4
+mult 2 3 4 0 # 5 light
+dielectric 1.3 23 # 6
+color g 1 1 1 0.01 # 7
+mult 1 -1 -2 # 8
+texture d leaf-texture.fb 1.0 # 9
+mult 1 -1 0 # 10 leaf
+3
+5 emitter
+10 leaf
+8 Sphere
+
+8 geo/Sphere.001
+8 geo/Sphere.002
+8 geo/Sphere.003
+8 geo/Sphere.004
+8 geo/Sphere.005
+8 geo/Sphere.006
+8 geo/Sphere.007
+8 geo/Sphere.008
+8 geo/Sphere.009
+8 geo/Sphere.010

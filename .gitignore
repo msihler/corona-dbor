@@ -43,3 +43,4 @@ corona
 arch
 config.mk
 shaders/
+*Samples.pfm

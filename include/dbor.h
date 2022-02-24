@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define DBOR_DS 4
+#define MAPTRUSTTOLEVEL 0
 
 // fast implementation of density based outlier rejection
 typedef struct dbor_t
@@ -52,7 +53,7 @@ static inline void dbor_cleanup(dbor_t *d)
 // evaluate the trust value/duplicity of a sample
 static inline float dbor_trust(const dbor_t *d, float x, float y, float throughput)
 {
-#if 1
+#if MAPTRUSTTOLEVEL == 0
   // const float logval = common_fasterlog2(throughput+1.0f)*.5f;
   const float logval = MAX(0, log2f(throughput));
   const int l = CLAMP((int)logval, 0, d->num_buffers-1);
@@ -69,7 +70,18 @@ static inline float dbor_trust(const dbor_t *d, float x, float y, float throughp
        + d->throughputs[ l][i+j*d->buf_width]
        + d->throughputs[ u][i+j*d->buf_width];
 #else
-  if (!(throughput > 0.f))
+  int i = CLAMP((int)(x/DBOR_DS), 0, d->buf_width-1);
+  int j = CLAMP((int)(y/DBOR_DS), 0, d->buf_height-1);
+  int l = findHighestDBORLevel(i, j);
+//  const int l = CLAMP((int)val, 0, d->num_buffers-1);
+  int ll = CLAMP(l-1, 0, d->num_buffers-1);
+ // printf("val was %f, l was %d, ll was %d, returned %f\n", val, l, ll, d->throughputs[ll][i+j*d->buf_width]
+    //     + d->throughputs[ l][i+j*d->buf_width]);
+  return d->throughputs[ll][i+j*d->buf_width]
+         + d->throughputs[ l][i+j*d->buf_width];
+
+
+  /*if (!(throughput > 0.f))
     return 0.f;
 
   const float logval = MAX(0, log2f(throughput));
@@ -102,7 +114,7 @@ static inline float dbor_trust(const dbor_t *d, float x, float y, float throughp
       n = n_tmp;
   }
   n_avg /= 9.f;
-  return n_avg;
+  return n_avg;*/
 #endif
 }
 

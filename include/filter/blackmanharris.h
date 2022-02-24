@@ -63,6 +63,8 @@ static inline void filter_blackmanharris_splat(
     weight += f;
   }
   if(weight <= 0) return;
+  int factor = getFactor(i, j);
+  weight = weight * factor;
   weight = 1.0f/weight;
   for(int v=v0;v<v4;v++) for(int u=u0;u<u4;u++)
   {

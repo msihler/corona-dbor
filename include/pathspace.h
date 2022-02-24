@@ -150,7 +150,7 @@ typedef struct vertex_t
   hit_t hit;
 
   // monte carlo related
-  mf_t pdf;               // on-surface probability (vertex area measure)
+  float pdf;               // on-surface probability (vertex area measure)
   mf_t pdf_mnee;          // XXX replace by generic pdf cache!
   mf_t throughput;        // throughput as constructed (incoming to this vertex)
   mf_t total_throughput;  // sum of throughputs up to when this vertex was the last one (includes emission at every previous, too)

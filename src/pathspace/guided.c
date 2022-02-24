@@ -1275,7 +1275,6 @@ int guided_record_path(
 #if USE_DBOR==1
   {
     const double trust = dbor_trust(c->dbor, path->sensor.pixel_i, path->sensor.pixel_j, throughput) / (rt.frames+1);
-
     if(trust > TRUST_RECORD_THR) 
     {
       if (st == st_guided)

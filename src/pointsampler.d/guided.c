@@ -531,6 +531,8 @@ void pointsampler_mutate(path_t *curr, path_t *tent)
     }
     else guided_misses++;
   }
+  
+  
 }
 
 void pointsampler_mutate_with_pixel(path_t *curr, path_t *tent, float i, float j)

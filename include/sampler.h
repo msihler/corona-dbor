@@ -54,3 +54,8 @@ md_t sampler_sum_pdf_dwp(path_t *p);
 
 // output info for sidecar file
 void sampler_print_info(FILE *fd);
+
+
+int findHighestDBORLevel(float i, float j);
+
+float getTrustOfHighestDBORLevel(float i, float j);

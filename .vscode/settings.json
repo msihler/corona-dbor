@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.inc": "c",
+        "functional": "c",
+        "gaussconv": "c"
+    },
+    "jupyter.jupyterServerType": "local",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}

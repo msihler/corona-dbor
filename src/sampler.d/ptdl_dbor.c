@@ -19,7 +19,6 @@
 
 #include "sampler.h"
 #include "points.h"
-#include "pointsampler.h"
 #include "display.h"
 #include "shader.h"
 #include "spectrum.h"
@@ -27,8 +26,12 @@
 #include "pathspace/nee.h"
 #include "pathspace/tech.h"
 
+#define WRITEDBOR 0
 #define FILTER_FIREFLYS 1
 #define TRUST_THR 0.25
+//Amount a grid cell's spp with sufficient fireflies gets multiplied by
+#define FIREFLYMULTIPLIER 20
+#define LIGHTSOURCEMULTIPLIER -1
 
 // std backward pathtracer with next event estimation
 static void splat_fb(float* fb, path_t* p, float val)
@@ -92,9 +95,12 @@ void sampler_prepare_frame(sampler_t *s)
   write_fb(s->fb_filtered, "fb_filtered");
   write_fb(s->fb_all, "fb_all");
   write_fb(s->fb_result, "fb_result");
-  if (rt.frames == 10)
-    dbor_export(s->dbor, "ptdl_dbor", view_overlays()+1);
+  if (WRITEDBOR == 1) {
+    if (rt.frames == 10)
+      dbor_export(s->dbor, "ptdl_dbor", view_overlays()+1);
+  }
 }
+
 
 void sampler_clear(sampler_t *s) {
   memset(s->fb_filtered, 0, sizeof(float)*view_width()*view_height()*3);
@@ -137,6 +143,24 @@ static inline float nee_probability(const int v)
   return 0.1;
 }
 
+float getTrustOfHighestDBORLevel(float i, float j) 
+{
+  return dbor_trust(rt.sampler->dbor, i, j, 0);
+}
+
+int findHighestDBORLevel(float i, float j) 
+{
+  for (int n = rt.sampler->dbor->num_buffers-1; n > 0; n--) {
+    int offset = i+j*rt.sampler->dbor->buf_width;
+    if (rt.sampler->dbor->throughputs[n][offset] >= 0.001) {
+      //printf("returned %d \n", n);
+      return n;
+    }
+  }
+ // printf("returned nothing\n");
+  return 0;
+}
+
 void sampler_create_path(path_t *path)
 {
   while(1)
@@ -162,13 +186,18 @@ void sampler_create_path(path_t *path)
 #endif
         if (firefly)
         {
+          //If a firefly was found, increment the counter for the adaptive pixel sampling
+          setNewFactor(FIREFLYMULTIPLIER, path->sensor.pixel_i, path->sensor.pixel_j);
           splat_fb(rt.sampler->fb_filtered, path, contrib);
         }
         else
         {
+          if (contrib >= 8.f) {
+            setNewFactor(LIGHTSOURCEMULTIPLIER, path->sensor.pixel_i, path->sensor.pixel_j);
+          }
           splat_fb(rt.sampler->fb_result, path, contrib);
-          pointsampler_splat(path, contrib);
         }
+        pointsampler_splat(path, contrib);
         splat_fb(rt.sampler->fb_all, path, contrib);
       }
     }
@@ -199,14 +228,16 @@ void sampler_create_path(path_t *path)
 #endif
         if (firefly)
         {
+          //If a firefly was found, increment the counter for the adaptive pixel sampling
+          setNewFactor(FIREFLYMULTIPLIER, path->sensor.pixel_i, path->sensor.pixel_j);
           splat_fb(rt.sampler->fb_filtered, path, contrib);
         }
         else
         {
           splat_fb(rt.sampler->fb_result, path, contrib);
-          pointsampler_splat(path, contrib);
         }
         splat_fb(rt.sampler->fb_all, path, contrib);
+        pointsampler_splat(path, contrib);
       }
     }
     path_pop(path);

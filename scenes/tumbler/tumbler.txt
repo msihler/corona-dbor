@@ -1,0 +1,24 @@
+corona-13: necklace-559-g13699da
+file     : /data/scenes/tumbler/tumbler
+aabb     : (-10.945, 4.543)x(-4.026, 11.461)x(-0.000, 5.986) dm^3
+res      : 1024x576
+points   : simple and fast mersenne twister
+primitive: 294914 indexed primitives with motion blur support
+accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
+shader   : loadable shader support
+camera   : thin lens model
+  focus  : 10.595409
+  film   : 36mm x 20mm
+         : 1/30 f/8.0 60mm iso 100
+render   : global illumination, memory friendly framebuffer
+           samples per pixel: 535 (0.61 s/prog) max path vertices 32
+           elapsed times: wallclock 324.30s (05:24.30), user 3809.77s (1h 03:29.77)
+           average image intensity (rgb): (0.583328 0.580239 0.577572)
+filter   : blackman harris, using spinlocks
+sampler  : pathtracer with next event estimation and mis
+mutations: metropolis as in kelemen and szirmay-kalos
+           large step probability 0.200000
+           mean acceptance 82.40%
+spectrum : grid-based full gamut reconstruction
+camera   : CIE XYZ
+input    : linear rec709 adapted to illuminant E

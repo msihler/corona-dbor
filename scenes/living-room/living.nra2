@@ -1,0 +1,88 @@
+const 1 1 1 1.0#envmap sky19.pfm 2000 #
+19
+diffuse # 0
+color d 0.3 0.3 0.3 # 1
+mult 1 -1 -2 # 2 default gray
+texture g wood.fb 1.0 # 3
+mult 2 -1 17 18 # 4 glossy floor
+texture d picture8.fb 1.0 # 5
+mult 1 -1 0 # 6 picture
+texture d leaf.fb 1.0 # 7
+mult 1 -1 0 # 8 leaves
+color g 1 1 1 0.1 # 9
+metal Au # 10
+mult 1 -2 -1 # 11 rough gold
+color g 1 1 1 0.005 # 12
+dielectric 1.4 60 # 13
+mult 1 -2 -1 # 14 glass layer
+texture d lincoln.fb 1.0 # 15
+mult 1 -1 0 # 16 picture of lincoln
+color g 1 1 1 0.1 # 17
+metal Ti # 18
+66
+16 lincoln
+2 bottle
+4 floor
+2 glass0
+2 glass1
+11 horse
+8 leaves
+8 leavesr
+2 Mesh001
+2 Mesh003
+2 Mesh004
+2 Mesh005
+2 Mesh006
+8 Mesh007
+2 Mesh008
+2 Mesh009
+2 Mesh010
+2 Mesh011
+2 Mesh015
+2 Mesh016
+2 Mesh017
+2 Mesh018
+2 Mesh020
+2 Mesh022
+6 picture
+2 Mesh024
+8 Mesh025
+2 Mesh026
+2 Mesh027
+2 Mesh028
+2 Mesh029
+2 Mesh033
+2 Mesh035
+2 Mesh036
+2 Mesh038
+2 Mesh039
+2 Mesh040
+2 Mesh041
+2 Mesh042
+2 Mesh043
+14 mirror
+2 Mesh046
+2 Mesh048
+2 Mesh049
+2 Mesh050
+2 Mesh051
+2 Mesh052
+2 Mesh053
+2 Mesh054
+2 Mesh055
+2 Mesh056
+2 Mesh057
+2 Mesh059
+2 Mesh060
+2 Mesh061
+2 Mesh063
+2 sofaback
+2 sofabottom
+2 sofacussion0
+2 sofacussion1
+2 sofacussion2
+2 sofalegs
+2 sofaseat
+2 tablelegs
+2 tablepillar
+2 tabletop
