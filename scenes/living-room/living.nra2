@@ -1,4 +1,4 @@
-const 10 10 10 1.0#envmap sky19.pfm 2000 #
+const 100 100 100 1.0#envmap sky19.pfm 2000 #
 19
 diffuse # 0
 color d 0.3 0.3 0.3 # 1
