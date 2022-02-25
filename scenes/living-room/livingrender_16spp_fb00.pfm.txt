@@ -8,17 +8,17 @@ shader   : loadable shader support
 render   : global illumination
 view     : samples per pixel: 16 (0.63 s/prog) max path vertices 32
            res 1024x576
-           elapsed wallclock prog 10.08s (10.07), total 10.93s (10.93), user 714.89s (11:54.89)
+           elapsed wallclock prog 10.07s (10.06), total 10.93s (10.92), user 720.36s (12:00.36)
            active cam 0
 camera   : thin lens model
   focus  : 28.487848
   film   : 35mm x 20mm
          : 1/125 f/4.0 20mm iso 100
-           cam 0 average image intensity (rgb): (0.005619 0.004399 0.004200)
+           cam 0 average image intensity (rgb): (0.056381 0.044133 0.042096)
            ...|....1....|....2....|....3..
            █                              
-           █▇                             
-           ██▇▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+           █▅                             
+           ██▆▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 render   : global illumination
 filter   : blackman harris, using spinlocks
 sampler  : pathtracer with next event estimation and mis
