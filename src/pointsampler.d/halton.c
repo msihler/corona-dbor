@@ -41,7 +41,7 @@ static uint64_t RENDERSTOPTIME = 0;
 //Define if the sample distribution should be printed out after every iteration (0 means no)
 static int WRITEFBINDIVIDUAL = 0;
 //Size of a single grid cell
-#define GRID_SIZE 16
+#define GRID_SIZE 2
 //Samples per Pixel standard value
 #define SAMPLE_SIZE 1
 //Multiplier that applies once sufficient Fireflies were found in a grid cell
@@ -49,7 +49,7 @@ static int WRITEFBINDIVIDUAL = 0;
 //Threshold that determines if enough fireflies were found to enhance sampling
 #define FIREFLYTHRESHOLD 4
 //Threshold to define when too many fireflies were found in a cell (Light sources)
-#define MAX_BRIGHT_OUTLIERS GRID_SIZE * 0.3f * GRID_SIZE
+#define MAX_BRIGHT_OUTLIERS 4
 #define LIGHTSOURCEMULTIPLIER -1
 static int init = 0;
 static int HORIZONTALSIZE;
