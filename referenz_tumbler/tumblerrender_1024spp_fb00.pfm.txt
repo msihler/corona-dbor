@@ -1,0 +1,27 @@
+corona-13: 
+file     : scenes/scenes/tumbler/tumbler
+aabb     : (-10.945, 4.543)x(-4.799, 11.461)x(-0.000, 9.712) dm^3
+points   : simple and fast mersenne twister
+primitive: 657675 indexed primitives with motion blur support
+accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
+shader   : loadable shader support
+render   : global illumination
+view     : samples per pixel: 1024 (0.12 s/prog) max path vertices 32
+           res 1024x576
+           elapsed wallclock prog 122.55s (02:02.55), total 123.23s (02:03.23), user 12338.34s (3h 25:38.34)
+           active cam 0
+camera   : thin lens model
+  focus  : 9.775250
+  film   : 35mm x 20mm
+         : 1/125 f/2.0 60mm iso 100
+           cam 0 average image intensity (rgb): (0.664656 0.383142 0.230911)
+           ...|....1....|....2....|....3..
+            █                             
+            █▂█                           
+            ███▇█▃▄▃▂▂█▄▅▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+render   : global illumination
+filter   : blackman harris, using spinlocks
+sampler  : pathtracer with next event estimation and mis
+mutations: halton points
+camera   : linear rec709 D65
+input    : linear rec709 D65
