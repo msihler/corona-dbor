@@ -243,10 +243,6 @@ void pointsampler_mutate(path_t *curr, path_t *tent)
       overallSamples[i] = 0;
       brightOutliers[i] = 0;
     }
-    free(sample_factor);
-    free(new_factor);
-    free(num_fireflies);
-    free(num_bright_outliers);
     new_factor = newFactors;
     sample_factor = factors;
     num_fireflies = fireflies;
@@ -364,9 +360,6 @@ void write_samples_as_framebuffer() {
   if (WRITEFBINDIVIDUAL == 1) {
     fb_export(fb, name, 0, 0);
   }
-  free(fb);
-  free(fb_header);
-  free(buffer);
 
   if (RENDERSTOPTIME != 0 && allSamplesValue >= RENDERSTOPTIME) {
     screenshotAndStop(allSamplesValue);
