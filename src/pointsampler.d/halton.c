@@ -37,7 +37,7 @@ static uint64_t RENDERSTOPTIME = 0;
 //Define whether the resulting variance map should be convoluted using a gaussian filter
 #define USEGAUSSIAN 1
 //The Sigma Parameter for the gaussian filter
-#define GAUSSIANSIGMA 1
+#define GAUSSIANSIGMA 0.5
 //Define if the sample distribution should be printed out after every iteration (0 means no)
 static int WRITEFBINDIVIDUAL = 0;
 //Size of a single grid cell
