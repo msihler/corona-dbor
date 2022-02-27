@@ -8,13 +8,13 @@ shader   : loadable shader support
 render   : global illumination
 view     : samples per pixel: 256 (0.74 s/prog) max path vertices 32
            res 1024x576
-           elapsed wallclock prog 189.49s (03:09.49), total 190.46s (03:10.45), user 2145.79s (35:45.78)
+           elapsed wallclock prog 189.46s (03:09.46), total 190.43s (03:10.43), user 2171.86s (36:11.86)
            active cam 0
 camera   : thin lens model
   focus  : 18.986294
   film   : 35mm x 20mm
          : 1/125 f/4.0 60mm iso 400
-           cam 0 average image intensity (rgb): (1.316549 1.029445 0.978152)
+           cam 0 average image intensity (rgb): (1.318820 1.029911 0.977307)
            ...|....1....|....2....|....3..
            █                              
            █  ▁                           
