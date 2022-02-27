@@ -35,7 +35,7 @@ static uint64_t RENDERSTOPTIME = 0;
 
 
 //Define whether the resulting variance map should be convoluted using a gaussian filter
-#define USEGAUSSIAN 1
+#define USEGAUSSIAN 0
 //The Sigma Parameter for the gaussian filter
 #define GAUSSIANSIGMA 0.5
 //Define if the sample distribution should be printed out after every iteration (0 means no)
@@ -254,9 +254,11 @@ void pointsampler_mutate(path_t *curr, path_t *tent)
     init = 1;
   }
   //Calculate random value within given pixel and mutate with that value
-  double i = points_rand(rt.points, common_get_threadid());
+ // double i = points_rand(rt.points, common_get_threadid());
+  double i = rand() / (RAND_MAX + 0.0f);
   i = i + row + (gridnumber % num_horizontal_cells) * GRID_SIZE;
-  double j = points_rand(rt.points, common_get_threadid());
+ // double j = points_rand(rt.points, common_get_threadid());
+  double j = rand() / (RAND_MAX + 0.0f);
   j = j + col + (gridnumber / num_horizontal_cells) * GRID_SIZE;
   pointsampler_mutate_with_pixel(curr, tent, i, j);
 
