@@ -41,7 +41,7 @@ static uint64_t RENDERSTOPTIME = 0;
 //Define if the sample distribution should be printed out after every iteration (0 means no)
 static int WRITEFBINDIVIDUAL = 0;
 //Size of a single grid cell
-#define GRID_SIZE 16
+#define GRID_SIZE 1
 //Samples per Pixel standard value
 #define SAMPLE_SIZE 1
 //Multiplier that applies once sufficient Fireflies were found in a grid cell
@@ -254,11 +254,9 @@ void pointsampler_mutate(path_t *curr, path_t *tent)
     init = 1;
   }
   //Calculate random value within given pixel and mutate with that value
- // double i = points_rand(rt.points, common_get_threadid());
-  double i = rand() / (RAND_MAX + 0.0f);
+  double i = points_rand(rt.points, common_get_threadid());
   i = i + row + (gridnumber % num_horizontal_cells) * GRID_SIZE;
- // double j = points_rand(rt.points, common_get_threadid());
-  double j = rand() / (RAND_MAX + 0.0f);
+  double j = points_rand(rt.points, common_get_threadid());
   j = j + col + (gridnumber / num_horizontal_cells) * GRID_SIZE;
   pointsampler_mutate_with_pixel(curr, tent, i, j);
 
