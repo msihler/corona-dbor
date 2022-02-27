@@ -47,9 +47,9 @@ static int WRITEFBINDIVIDUAL = 0;
 //Multiplier that applies once sufficient Fireflies were found in a grid cell
 #define FIREFLYMULTIPLIER 20
 //Threshold that determines if enough fireflies were found to enhance sampling
-#define FIREFLYTHRESHOLD 4
+#define FIREFLYTHRESHOLD 2
 //Threshold to define when too many fireflies were found in a cell (Light sources)
-#define MAX_BRIGHT_OUTLIERS 4
+#define MAX_BRIGHT_OUTLIERS 2
 #define LIGHTSOURCEMULTIPLIER -1
 static int init = 0;
 static int HORIZONTALSIZE;
