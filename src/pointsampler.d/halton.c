@@ -35,21 +35,21 @@ static uint64_t RENDERSTOPTIME = 0;
 
 
 //Define whether the resulting variance map should be convoluted using a gaussian filter
-#define USEGAUSSIAN 0
+#define USEGAUSSIAN 1
 //The Sigma Parameter for the gaussian filter
 #define GAUSSIANSIGMA 1
 //Define if the sample distribution should be printed out after every iteration (0 means no)
 static int WRITEFBINDIVIDUAL = 0;
 //Size of a single grid cell
-#define GRID_SIZE 64
+#define GRID_SIZE 16
 //Samples per Pixel standard value
 #define SAMPLE_SIZE 1
 //Multiplier that applies once sufficient Fireflies were found in a grid cell
 #define FIREFLYMULTIPLIER 20
 //Threshold that determines if enough fireflies were found to enhance sampling
-#define FIREFLYTHRESHOLD 20
+#define FIREFLYTHRESHOLD 16
 //Threshold to define when too many fireflies were found in a cell (Light sources)
-#define MAX_BRIGHT_OUTLIERS 20
+#define MAX_BRIGHT_OUTLIERS 0.3 * GRID_SIZE * GRID_SIZE
 #define LIGHTSOURCEMULTIPLIER -1
 static int init = 0;
 static int HORIZONTALSIZE;
