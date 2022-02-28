@@ -27,11 +27,12 @@ static inline void filter_box_splat(
     const float *const col)
 {
   float *p = fb->fb + fb->header->channels*((int)i+fb->header->width*(int)j);
+  float factor = 1 / (float)(getFactor(i, j) + 0.0f);
   for(int k=0;k<fb->header->channels;k++) 
 #ifdef FILTER_ATOMIC
-    common_atomic_add(p+k, col[k]);
+    common_atomic_add(p+k, col[k] * factor);
 #else
-    p[k] += col[k];
+    p[k] += col[k] * factor;
 #endif
 }
 

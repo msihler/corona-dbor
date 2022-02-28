@@ -2,14 +2,14 @@ MOD_accel?=qbvhmp
 MOD_camera?=thinlens
 CAMERA_LENS?=wideangle-ii
 CFLAGS+=-DCAMERA_LENS=\"$(CAMERA_LENS)\"
-MOD_display?=null
+MOD_display?=xorg
 LDFLAGS+=-lX11 # for xorg display
 # LDFLAGS+=-lGL -lSDL # for gl
 # LDFLAGS+=-ljpeg # mjpeg network display
 # sfmt, xorshift128p
 MOD_points?=sfmt
 MOD_render?=gi
-MOD_filter?=blackmanharris
+MOD_filter?=box
 MOD_sampler?=ptdl_dbor
 MOD_lights?=list
 MOD_pointsampler?=halton
