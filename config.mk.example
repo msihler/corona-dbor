@@ -9,7 +9,7 @@ LDFLAGS+=-lX11 # for xorg display
 # sfmt, xorshift128p
 MOD_points?=sfmt
 MOD_render?=gi
-MOD_filter?=box
+MOD_filter?=blackmanharris
 MOD_sampler?=ptdl_dbor
 MOD_lights?=list
 MOD_pointsampler?=halton

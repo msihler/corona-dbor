@@ -1,0 +1,19 @@
+black
+10
+diffuse # 0
+color d 0.2 0.2 0.2  # 1
+mult 1 -1 -2 # 2 default gray
+color d 0 0 0 # 3
+color e 4000 4000 4000 1 # 4
+mult 2 -2 -1 0 # 5 emitter
+color d 0.05 0.8 0.15 #7
+mult 1 -1 0 # 8 just green
+color d 0.9 0.05 0.05  # 1
+mult 1 -1 0 # 2 default red
+6
+5 lightsource
+2 floor
+7 right
+9 left
+2 back
+2 ceiling
