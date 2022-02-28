@@ -6,19 +6,19 @@ primitive: 4108 indexed primitives with motion blur support
 accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
 shader   : loadable shader support
 render   : global illumination
-view     : samples per pixel: 8 (0.79 s/prog) max path vertices 32
+view     : samples per pixel: 8 (0.89 s/prog) max path vertices 32
            res 1024x576
-           elapsed wallclock prog 6.34s (06.33), total 7.27s (07.26), user 64.73s (01:04.73)
+           elapsed wallclock prog 7.10s (07.09), total 8.09s (08.09), user 75.91s (01:15.91)
            active cam 0
 camera   : thin lens model
   focus  : 18.986294
   film   : 35mm x 20mm
          : 1/125 f/4.0 60mm iso 400
-           cam 0 average image intensity (rgb): (1.482514 1.168666 1.101633)
+           cam 0 average image intensity (rgb): (1.242971 0.971133 0.922697)
            ...|....1....|....2....|....3..
            █                              
            █  ▁                           
-           ██▁█▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+           █▇▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 render   : global illumination
 filter   : blackman harris, using spinlocks
 sampler  : pathtracer with next event estimation and mis
