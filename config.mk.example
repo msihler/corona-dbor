@@ -2,7 +2,7 @@ MOD_accel?=qbvhmp
 MOD_camera?=thinlens
 CAMERA_LENS?=wideangle-ii
 CFLAGS+=-DCAMERA_LENS=\"$(CAMERA_LENS)\"
-MOD_display?=xorg
+MOD_display?=null
 LDFLAGS+=-lX11 # for xorg display
 # LDFLAGS+=-lGL -lSDL # for gl
 # LDFLAGS+=-ljpeg # mjpeg network display
