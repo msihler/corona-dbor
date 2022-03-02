@@ -1,0 +1,27 @@
+corona-13: 
+file     : regression/0010_pt/testMedium
+aabb     : (-9.463, 4.834)x(-10.000, 10.000)x(0.000, 4.850) dm^3
+points   : simple and fast mersenne twister
+primitive: 4108 indexed primitives with motion blur support
+accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
+shader   : loadable shader support
+render   : global illumination
+view     : samples per pixel: 32 (0.30 s/prog) max path vertices 32
+           res 1024x576
+           elapsed wallclock prog 9.64s (09.64), total 10.14s (10.13), user 1147.88s (19:07.87)
+           active cam 0
+camera   : thin lens model
+  focus  : 18.986294
+  film   : 35mm x 20mm
+         : 1/125 f/4.0 60mm iso 400
+           cam 0 average image intensity (rgb): (0.292312 0.335331 0.411811)
+           ...|....1....|....2....|....3..
+           █                              
+           █▃ ▁                           
+           ██▃█▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+render   : global illumination
+filter   : blackman harris, using spinlocks
+sampler  : pathtracer with next event estimation and mis
+mutations: halton points
+camera   : linear rec709 D65
+input    : linear rec709 D65
