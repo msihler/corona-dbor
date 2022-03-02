@@ -1,22 +1,22 @@
 corona-13: 
-file     : ../scenes/color_and_spheres/box
+file     : ../corona-dbor/scenes/color_and_spheres/box
 aabb     : (-5.000, 5.000)x(0.000, 10.000)x(-5.000, 5.000) dm^3
 points   : simple and fast mersenne twister
 primitive: 6 indexed primitives with motion blur support
 accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
 shader   : loadable shader support
 render   : global illumination
-view     : samples per pixel: 8 (0.12 s/prog) max path vertices 32
+view     : samples per pixel: 8 (1.57 s/prog) max path vertices 32
            res 1024x576
-           elapsed wallclock prog 0.96s (00.96), total 1.28s (01.27), user 83.71s (01:23.70)
+           elapsed wallclock prog 12.57s (12.56), total 14.05s (14.05), user 891.54s (14:51.53)
            active cam 0
 camera   : thin lens model
   focus  : 32.129707
   film   : 35mm x 20mm
          : 1/125 f/11.0 50mm iso 1600
-           cam 0 average image intensity (rgb): (1.049502 0.806468 0.670618)
+           cam 0 average image intensity (rgb): (1.031223 0.792045 0.663939)
            ...|....1....|....2....|....3..
-           █▃                             
+           █▄                             
            ██▁                            
            ███▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁    
 render   : global illumination

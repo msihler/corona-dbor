@@ -1,24 +1,24 @@
 corona-13: 
-file     : ../corona-dbor/scenes/leaf/leaf
+file     : ../scenes/leaf/leaf
 aabb     : (-9.256, 5.005)x(-8.380, 3.669)x(-0.824, 8.053) dm^3
 points   : simple and fast mersenne twister
 primitive: 45231 indexed primitives with motion blur support
 accel    : qbvh with tight motion-blurred boxes and support for big scenes, parallel build.
 shader   : loadable shader support
 render   : global illumination
-view     : samples per pixel: 91 (0.93 s/prog) max path vertices 32
+view     : samples per pixel: 3000 (0.15 s/prog) max path vertices 32
            res 1024x576
-           elapsed wallclock prog 84.33s (01:24.33), total 84.21s (01:24.21), user 1143.77s (19:03.77)
+           elapsed wallclock prog 437.39s (07:17.39), total 437.66s (07:17.65), user 30378.82s (8h 26:18.82)
            active cam 0
 camera   : thin lens model
   focus  : 12.852427
   film   : 35mm x 20mm
          : 1/125 f/11.0 50mm iso 100
-           cam 0 average image intensity (rgb): (0.080914 0.102207 0.062821)
+           cam 0 average image intensity (rgb): (0.081255 0.104030 0.065699)
            ...|....1....|....2....|....3..
             █                             
-            █ ▇                           
-           ▇█▃█▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  ▁ 
+            █ █                           
+           ▇█▄█▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ 
 render   : global illumination
 filter   : blackman harris, using spinlocks
 sampler  : pathtracer with next event estimation and mis
